@@ -1,0 +1,29 @@
+CREATE TABLE IF NOT EXISTS Forums (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    titre VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+);
+
+CREATE TABLE IF NOT EXISTS Sujet (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    forum_id INT NOT NULL,
+    FOREIGN KEY (forum_id) REFERENCES Forums(id)
+);
+
+CREATE TABLE IF NOT EXISTS Message (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    content TEXT NOT NULL,
+    sujet_id INT NOT NULL,
+    user_id INT NOT NULL,
+    FOREIGN KEY (sujet_id) REFERENCES Sujet(id),
+    FOREIGN KEY (user_id) REFERENCES User(id)
+);
+
+CREATE TABLE IF NOT EXISTS User (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role INT NOT NULL
+);
